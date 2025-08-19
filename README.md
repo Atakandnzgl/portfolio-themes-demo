@@ -113,6 +113,7 @@ portfolio-themes-demo/
 - ✅ TypeScript support
 - ✅ SEO optimized
 - ✅ Fast loading
+- ✅ Auto-deploy with Vercel
 
 ## 📝 License
 
@@ -129,3 +130,7 @@ This project is open source and available under the [MIT License](LICENSE).
 ## 📞 Support
 
 If you have any questions or need help, please open an issue on GitHub.
+
+## 🚀 Live Demo
+
+Visit the live demo: [Portfolio Themes Demo](https://portfolio-themes-demo-f0wcgnqjz-atakandnzgls-projects.vercel.app)
