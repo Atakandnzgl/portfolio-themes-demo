@@ -66,7 +66,7 @@ const AuraTheme: React.FC<{ portfolio: Portfolio }> = ({ portfolio }) => {
           />
           <Box sx={{ flex: 1, textAlign: { xs: 'center', md: 'left' } }}>
             <Typography variant="h3" sx={{ fontWeight: 700, mb: 1 }}>
-              {portfolio.firstName} {portfolio.lastName}
+              {portfolio.firstName} {portfolio.lastName} ✨
             </Typography>
             <Typography variant="h5" sx={{ color: 'text.secondary', mb: 2 }}>
               {portfolio.role}
