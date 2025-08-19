@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import { Box, Container, Typography, Button, Grid, Card, CardContent, AppBar, Toolbar } from '@mui/material'
 import Head from 'next/head'
+import AuraTheme from '../components/themes/aura/AuraTheme'
+import TechTheme from '../components/themes/tech/TechTheme'
+import ModernTheme from '../components/themes/modern/ModernTheme'
+import PersonaTheme from '../components/themes/persona/PersonaTheme'
 
 // Mock portfolio data
 const mockPortfolio = {
@@ -65,15 +69,15 @@ export default function Home() {
   const ThemeComponent = () => {
     switch (selectedTheme) {
       case 'aura':
-        return <div>Aura Theme Component</div>
+        return <AuraTheme portfolio={mockPortfolio} />
       case 'modern':
-        return <div>Modern Theme Component</div>
+        return <ModernTheme portfolio={mockPortfolio} />
       case 'persona':
-        return <div>Persona Theme Component</div>
+        return <PersonaTheme portfolio={mockPortfolio} />
       case 'tech':
-        return <div>Tech Theme Component</div>
+        return <TechTheme portfolio={mockPortfolio} />
       default:
-        return <div>Aura Theme Component</div>
+        return <AuraTheme portfolio={mockPortfolio} />
     }
   }
 
@@ -135,14 +139,21 @@ export default function Home() {
         <Box sx={{ 
           border: '1px solid #e0e0e0', 
           borderRadius: 2, 
-          p: 2, 
-          minHeight: '600px',
+          overflow: 'hidden',
           bgcolor: '#fafafa'
         }}>
-          <Typography variant="h5" gutterBottom sx={{ mb: 2 }}>
-            {themes.find(t => t.id === selectedTheme)?.name} Theme Preview
-          </Typography>
-          <ThemeComponent />
+          <Box sx={{ 
+            p: 2, 
+            bgcolor: '#f5f5f5', 
+            borderBottom: '1px solid #e0e0e0'
+          }}>
+            <Typography variant="h5" gutterBottom>
+              {themes.find(t => t.id === selectedTheme)?.name} Theme Preview
+            </Typography>
+          </Box>
+          <Box sx={{ minHeight: '600px' }}>
+            <ThemeComponent />
+          </Box>
         </Box>
 
         {/* Deploy Instructions */}
@@ -169,3 +180,4 @@ export default function Home() {
     </>
   )
 }
+
