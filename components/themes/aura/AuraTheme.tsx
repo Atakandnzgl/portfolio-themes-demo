@@ -88,9 +88,6 @@ const AuraTheme: React.FC<{ portfolio: Portfolio }> = ({ portfolio }) => {
               <Typography variant="h5" sx={{ color: 'text.secondary', mb: 2 }}>
                 {portfolio.role}
               </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2 }}>
-                {portfolio.city}, {portfolio.country}
-              </Typography>
               <Typography variant="body1" sx={{ lineHeight: 1.8, maxWidth: 600 }}>
                 {portfolio.about}
               </Typography>
