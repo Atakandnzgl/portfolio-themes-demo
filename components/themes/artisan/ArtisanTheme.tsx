@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Avatar, Card, CardContent, Chip, Grid, Button, TextField, Container } from '@mui/material';
+import { Box, Container, Typography, Avatar, Card, CardContent, Chip, Grid, Button, TextField } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { motion } from 'framer-motion';
 
@@ -20,18 +20,21 @@ const getTheme = (mode: 'light' | 'dark') => createTheme({
   palette: {
     mode,
     background: {
-      default: mode === 'light' ? '#ffffff' : '#000000',
-      paper: mode === 'light' ? '#fafafa' : '#111111',
+      default: '#0F1117',
+      paper: '#1A1D26',
     },
     text: {
-      primary: mode === 'light' ? '#000000' : '#ffffff',
-      secondary: mode === 'light' ? '#666666' : '#cccccc',
+      primary: '#ffffff',
+      secondary: '#a0a0a0',
+    },
+    primary: {
+      main: '#FF5E5B',
     },
   },
 });
 
-const AuraTheme: React.FC<{ portfolio: Portfolio }> = ({ portfolio }) => {
-  const theme = getTheme('light');
+const ArtisanTheme: React.FC<{ portfolio: Portfolio }> = ({ portfolio }) => {
+  const theme = getTheme('dark');
 
   return (
     <ThemeProvider theme={theme}>
@@ -41,13 +44,16 @@ const AuraTheme: React.FC<{ portfolio: Portfolio }> = ({ portfolio }) => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
         sx={{
-          p: { xs: 2, sm: 3, md: 4 },
-          bgcolor: 'background.default',
-          color: 'text.primary',
           minHeight: '100vh',
-          fontFamily: 'Inter, sans-serif',
-          pt: 15,
-          pb: 8
+          bgcolor: '#0F1117',
+          color: '#ffffff',
+          transition: 'background-color 0.3s ease',
+          pb: 8,
+          pt: 4,
+          '& *::selection': {
+            backgroundColor: '#FF5E5B',
+            color: '#0F1117'
+          }
         }}
       >
         <Container
@@ -57,72 +63,89 @@ const AuraTheme: React.FC<{ portfolio: Portfolio }> = ({ portfolio }) => {
             px: { xs: 2, sm: 4, md: 6 }
           }}
         >
-          {/* Header Section */}
-          <Box sx={{
-            display: 'flex',
-            flexDirection: { xs: 'column', md: 'row' },
-            alignItems: 'center',
-            gap: 4,
-            mb: 6,
-            p: 4,
-            border: '1px solid',
-            borderColor: 'text.primary',
-            borderRadius: 2,
-            bgcolor: 'background.paper'
+          {/* Hero Section with Avatar */}
+          <Card sx={{
+            bgcolor: '#1A1D26',
+            border: '2px solid #2A2D36',
+            color: 'white',
+            mb: 6
           }}>
-            <Avatar
-              src={portfolio.imgUrl}
-              alt={`${portfolio.firstName} ${portfolio.lastName}`}
-              sx={{
-                width: { xs: 120, md: 150 },
-                height: { xs: 120, md: 150 },
-                border: '3px solid',
-                borderColor: 'text.primary',
-                bgcolor: 'background.default'
-              }}
-            />
-            <Box sx={{ flex: 1, textAlign: { xs: 'center', md: 'left' } }}>
-              <Typography variant="h3" sx={{ fontWeight: 700, mb: 1 }}>
-                {portfolio.firstName} {portfolio.lastName} ✨
-              </Typography>
-              <Typography variant="h5" sx={{ color: 'text.secondary', mb: 2 }}>
-                {portfolio.role}
-              </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2 }}>
-                {portfolio.city}, {portfolio.country}
-              </Typography>
-              <Typography variant="body1" sx={{ lineHeight: 1.8, maxWidth: 600 }}>
-                {portfolio.about}
-              </Typography>
-            </Box>
-          </Box>
+            <CardContent sx={{ p: 4 }}>
+              <Box sx={{
+                display: 'flex',
+                flexDirection: { xs: 'column', md: 'row' },
+                alignItems: 'center',
+                gap: 4
+              }}>
+                <Avatar
+                  src={portfolio.imgUrl}
+                  alt={`${portfolio.firstName} ${portfolio.lastName}`}
+                  sx={{
+                    width: 128,
+                    height: 128,
+                    border: '4px solid #FF5E5B',
+                    fontSize: '2rem',
+                    fontWeight: 'bold',
+                    bgcolor: '#FF5E5B'
+                  }}
+                >
+                  {portfolio.firstName[0]}{portfolio.lastName[0]}
+                </Avatar>
+                <Box sx={{ flex: 1, textAlign: { xs: 'center', md: 'left' } }}>
+                  <Typography variant="h2" sx={{ 
+                    fontWeight: 700, 
+                    mb: 2,
+                    fontSize: { xs: '2.5rem', md: '3.75rem' }
+                  }}>
+                    {portfolio.firstName} {portfolio.lastName}
+                  </Typography>
+                  <Typography variant="h5" sx={{ 
+                    color: '#FF5E5B', 
+                    mb: 2, 
+                    fontWeight: 600 
+                  }}>
+                    {portfolio.role}
+                  </Typography>
+                  <Typography variant="body1" sx={{ color: '#a0a0a0', mb: 2 }}>
+                    📍 {portfolio.city}, {portfolio.country}
+                  </Typography>
+                  <Typography variant="body1" sx={{ 
+                    lineHeight: 1.8, 
+                    maxWidth: 600,
+                    fontSize: '1.125rem'
+                  }}>
+                    {portfolio.about}
+                  </Typography>
+                </Box>
+              </Box>
+            </CardContent>
+          </Card>
 
           {/* Two Column Layout */}
           <Grid container spacing={4} sx={{ mb: 4 }}>
             {/* Left Column - Experience */}
             <Grid item xs={12} md={6}>
-              <Typography variant="h4" sx={{ fontWeight: 600, mb: 3 }}>
+              <Typography variant="h4" sx={{ fontWeight: 600, mb: 3, color: '#ffffff' }}>
                 Experience
               </Typography>
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
                 {portfolio.experiences.map((exp, index) => (
                   <Card key={index} sx={{
-                    border: '1px solid',
-                    borderColor: 'text.primary',
-                    bgcolor: 'background.paper',
+                    bgcolor: '#1A1D26',
+                    border: '1px solid #2A2D36',
                     '&:hover': {
                       transform: 'translateY(-2px)',
                       transition: 'transform 0.2s ease-in-out'
                     }
                   }}>
                     <CardContent>
-                      <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+                      <Typography variant="h6" sx={{ fontWeight: 600, mb: 1, color: '#ffffff' }}>
                         {exp.title}
                       </Typography>
-                      <Typography variant="body2" sx={{ color: 'text.secondary', mb: 1 }}>
+                      <Typography variant="body2" sx={{ color: '#a0a0a0', mb: 1 }}>
                         {exp.date}
                       </Typography>
-                      <Typography variant="body1">
+                      <Typography variant="body1" sx={{ color: '#ffffff' }}>
                         {exp.description}
                       </Typography>
                     </CardContent>
@@ -133,7 +156,7 @@ const AuraTheme: React.FC<{ portfolio: Portfolio }> = ({ portfolio }) => {
 
             {/* Right Column - Skills */}
             <Grid item xs={12} md={6}>
-              <Typography variant="h4" sx={{ fontWeight: 600, mb: 3 }}>
+              <Typography variant="h4" sx={{ fontWeight: 600, mb: 3, color: '#ffffff' }}>
                 Skills
               </Typography>
               <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
@@ -142,13 +165,12 @@ const AuraTheme: React.FC<{ portfolio: Portfolio }> = ({ portfolio }) => {
                     key={index}
                     label={skill.title}
                     sx={{
-                      border: '1px solid',
-                      borderColor: 'text.primary',
-                      bgcolor: 'background.paper',
-                      color: 'text.primary',
+                      bgcolor: '#1A1D26',
+                      border: '1px solid #2A2D36',
+                      color: '#ffffff',
                       '&:hover': {
-                        bgcolor: 'text.primary',
-                        color: 'background.paper'
+                        bgcolor: '#FF5E5B',
+                        color: '#0F1117'
                       }
                     }}
                   />
@@ -161,28 +183,27 @@ const AuraTheme: React.FC<{ portfolio: Portfolio }> = ({ portfolio }) => {
           <Grid container spacing={4}>
             {/* Blogs */}
             <Grid item xs={12} md={8}>
-              <Typography variant="h4" sx={{ fontWeight: 600, mb: 3 }}>
+              <Typography variant="h4" sx={{ fontWeight: 600, mb: 3, color: '#ffffff' }}>
                 Latest Posts
               </Typography>
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
                 {portfolio.blogs.map((blog) => (
                   <Card key={blog._id} sx={{
-                    border: '1px solid',
-                    borderColor: 'text.primary',
-                    bgcolor: 'background.paper',
+                    bgcolor: '#1A1D26',
+                    border: '1px solid #2A2D36',
                     '&:hover': {
                       transform: 'translateY(-2px)',
                       transition: 'transform 0.2s ease-in-out'
                     }
                   }}>
                     <CardContent>
-                      <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+                      <Typography variant="h6" sx={{ fontWeight: 600, mb: 1, color: '#ffffff' }}>
                         {blog.title}
                       </Typography>
-                      <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2 }}>
+                      <Typography variant="body2" sx={{ color: '#a0a0a0', mb: 2 }}>
                         {new Date(blog.createdAt).toLocaleDateString()}
                       </Typography>
-                      <Typography variant="body1">
+                      <Typography variant="body1" sx={{ color: '#ffffff' }}>
                         {blog.description}
                       </Typography>
                     </CardContent>
@@ -193,7 +214,7 @@ const AuraTheme: React.FC<{ portfolio: Portfolio }> = ({ portfolio }) => {
 
             {/* Contact Form */}
             <Grid item xs={12} md={4}>
-              <Typography variant="h4" sx={{ fontWeight: 600, mb: 3 }}>
+              <Typography variant="h4" sx={{ fontWeight: 600, mb: 3, color: '#ffffff' }}>
                 Get In Touch
               </Typography>
               <Box component="form" sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
@@ -204,19 +225,21 @@ const AuraTheme: React.FC<{ portfolio: Portfolio }> = ({ portfolio }) => {
                   sx={{
                     '& .MuiOutlinedInput-root': {
                       '& fieldset': {
-                        borderColor: 'text.primary',
+                        borderColor: '#2A2D36',
                       },
                       '&:hover fieldset': {
-                        borderColor: 'text.primary',
+                        borderColor: '#FF5E5B',
                       },
                       '&.Mui-focused fieldset': {
-                        borderColor: 'text.primary',
+                        borderColor: '#FF5E5B',
                       },
+                      bgcolor: '#1A1D26',
+                      color: '#ffffff',
                     },
                     '& .MuiInputLabel-root': {
-                      color: 'text.secondary',
+                      color: '#a0a0a0',
                       '&.Mui-focused': {
-                        color: 'text.primary',
+                        color: '#FF5E5B',
                       },
                     },
                   }}
@@ -228,19 +251,21 @@ const AuraTheme: React.FC<{ portfolio: Portfolio }> = ({ portfolio }) => {
                   sx={{
                     '& .MuiOutlinedInput-root': {
                       '& fieldset': {
-                        borderColor: 'text.primary',
+                        borderColor: '#2A2D36',
                       },
                       '&:hover fieldset': {
-                        borderColor: 'text.primary',
+                        borderColor: '#FF5E5B',
                       },
                       '&.Mui-focused fieldset': {
-                        borderColor: 'text.primary',
+                        borderColor: '#FF5E5B',
                       },
+                      bgcolor: '#1A1D26',
+                      color: '#ffffff',
                     },
                     '& .MuiInputLabel-root': {
-                      color: 'text.secondary',
+                      color: '#a0a0a0',
                       '&.Mui-focused': {
-                        color: 'text.primary',
+                        color: '#FF5E5B',
                       },
                     },
                   }}
@@ -254,19 +279,21 @@ const AuraTheme: React.FC<{ portfolio: Portfolio }> = ({ portfolio }) => {
                   sx={{
                     '& .MuiOutlinedInput-root': {
                       '& fieldset': {
-                        borderColor: 'text.primary',
+                        borderColor: '#2A2D36',
                       },
                       '&:hover fieldset': {
-                        borderColor: 'text.primary',
+                        borderColor: '#FF5E5B',
                       },
                       '&.Mui-focused fieldset': {
-                        borderColor: 'text.primary',
+                        borderColor: '#FF5E5B',
                       },
+                      bgcolor: '#1A1D26',
+                      color: '#ffffff',
                     },
                     '& .MuiInputLabel-root': {
-                      color: 'text.secondary',
+                      color: '#a0a0a0',
                       '&.Mui-focused': {
-                        color: 'text.primary',
+                        color: '#FF5E5B',
                       },
                     },
                   }}
@@ -274,13 +301,12 @@ const AuraTheme: React.FC<{ portfolio: Portfolio }> = ({ portfolio }) => {
                 <Button
                   variant="contained"
                   sx={{
-                    bgcolor: 'text.primary',
-                    color: 'background.default',
-                    border: '1px solid',
-                    borderColor: 'text.primary',
+                    bgcolor: '#FF5E5B',
+                    color: '#0F1117',
+                    border: '1px solid #FF5E5B',
                     '&:hover': {
-                      bgcolor: 'background.default',
-                      color: 'text.primary',
+                      bgcolor: '#0F1117',
+                      color: '#FF5E5B',
                     },
                   }}
                 >
@@ -295,4 +321,4 @@ const AuraTheme: React.FC<{ portfolio: Portfolio }> = ({ portfolio }) => {
   );
 };
 
-export default AuraTheme;
+export default ArtisanTheme;

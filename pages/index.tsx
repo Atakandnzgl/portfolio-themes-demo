@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { Box, Container, Typography, Button, Grid, Card, CardContent, AppBar, Toolbar } from '@mui/material'
+import { Box, Container, Typography, Grid, Card, CardContent, AppBar, Toolbar } from '@mui/material'
 import Head from 'next/head'
 import AuraTheme from '../components/themes/aura/AuraTheme'
 import TechTheme from '../components/themes/tech/TechTheme'
 import ModernTheme from '../components/themes/modern/ModernTheme'
 import PersonaTheme from '../components/themes/persona/PersonaTheme'
+import EtopesTheme from '../components/themes/etopes/EtopesTheme'
 
 // Mock portfolio data
 const mockPortfolio = {
@@ -60,7 +61,8 @@ const themes = [
   { id: 'aura', name: 'Aura', description: 'Minimalist black & white design' },
   { id: 'modern', name: 'Modern', description: 'Clean and contemporary layout' },
   { id: 'persona', name: 'Persona', description: 'Personal and creative style' },
-  { id: 'tech', name: 'Tech', description: 'Technology-focused theme' }
+  { id: 'tech', name: 'Tech', description: 'Technology-focused theme' },
+  { id: 'etopes', name: 'Etopes', description: 'Dark tech-inspired design' }
 ]
 
 export default function Home() {
@@ -76,6 +78,8 @@ export default function Home() {
         return <PersonaTheme portfolio={mockPortfolio} />
       case 'tech':
         return <TechTheme portfolio={mockPortfolio} />
+      case 'etopes':
+        return <EtopesTheme portfolio={mockPortfolio} />
       default:
         return <AuraTheme portfolio={mockPortfolio} />
     }
@@ -85,7 +89,7 @@ export default function Home() {
     <>
       <Head>
         <title>Portfolio Themes Demo</title>
-        <meta name="description" content="Portfolio Themes Demo - Aura, Modern, Persona, Tech" />
+        <meta name="description" content="Portfolio Themes Demo - Aura, Modern, Persona, Tech, Etopes" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -109,7 +113,7 @@ export default function Home() {
         {/* Theme Selection */}
         <Grid container spacing={2} sx={{ mb: 4 }}>
           {themes.map((theme) => (
-            <Grid item xs={12} sm={6} md={3} key={theme.id}>
+            <Grid item xs={12} sm={6} md={2.4} key={theme.id}>
               <Card 
                 sx={{ 
                   cursor: 'pointer',

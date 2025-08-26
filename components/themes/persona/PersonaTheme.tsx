@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Avatar, Card, CardContent, Chip, Grid, Button, TextField } from '@mui/material';
+import { Box, Typography, Avatar, Card, CardContent, Grid, Button, TextField } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 interface Portfolio {
@@ -393,3 +393,5 @@ const PersonaTheme: React.FC<{ portfolio: Portfolio }> = ({ portfolio }) => {
 };
 
 export default PersonaTheme;
+
+
